@@ -155,7 +155,9 @@ Bundle 'vim-multiple-cursors'
 Bundle 'php.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'suan/vim-instant-markdown'
- 
+Bundle 'spf13/PIV'
+Bundle 'arnaud-lb/vim-php-namespace'
+
 
 " -----------------------------------------------------------------------------
 "  < 编码配置 >
@@ -225,6 +227,21 @@ noremap <c-k> <c-w>k
 noremap <c-j> <c-w>j
 noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
+" Visual shifting (does not exit Visual mode) 保留选中状态
+vnoremap < <gv
+vnoremap > >gv
+" For when you forget to sudo.. Really Write the file. 使用 sudo 保存文件
+cmap w!! w !sudo tee % >/dev/null
+
+" Some helpers to edit mode
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
+
+
+
+
  
 " 启用每行超过80列的字符提示（字体变蓝并加下划线），不启用就注释掉
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -617,7 +634,10 @@ inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
 nnoremap <C-P> :call PhpDocSingle()<CR> 
 vnoremap <C-P> :call PhpDocRange()<CR> 
 
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags 
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
 "let g:user_emmet_expandabbr_key = '<Tab>'
+
